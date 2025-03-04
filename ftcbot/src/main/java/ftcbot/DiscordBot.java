@@ -9,7 +9,6 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import webscraper.*;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 import javax.security.auth.login.LoginException;
 public class DiscordBot extends ListenerAdapter{
@@ -70,7 +69,7 @@ public class DiscordBot extends ListenerAdapter{
                     if(lastAction!=Action.ADD_TO_CART){
                         String search = content.substring(content.indexOf(" "));
                         channel.sendMessage("searching...").queue();
-                        lastSearchResults = GoBildaScraper.searchForProduct(search);
+                        lastSearchResults = GoBildaScraper.searchForGoBildaProduct(search);
                         editLastMessage(channel, "Which of these are you looking for?");
                         
 
@@ -91,37 +90,6 @@ public class DiscordBot extends ListenerAdapter{
                     channel.sendMessage("Not a valid command").queue();
             }
         }
-
-
-
-
-
-        // if(content.startsWith("Hello")){
-        //     channel.sendMessage("Hello, " + event.getAuthor().getAsMention() + "!").queue();
-        // }
-        // if(content.startsWith("!cart")){
-        //     if(lastAction==Action.SEARCH){
-        //         int selection = Integer.parseInt(content.substring(content.indexOf(" ")+1));
-        //         channel.sendMessage("Adding To Cart: \n\n" + lastSearchResults.get(selection-1)).queue();
-        //     }else{
-        //         lastAction = Action.SEARCH;
-        //         String search = content.substring(content.indexOf(" "));
-        //         lastSearchResults = GoBildaScraper.searchForProduct(search);
-        //         channel.sendMessage("Which of these are you looking for?").queue();
-        //         for(int i=0;i<2;i++){
-        //             channel.sendMessage(i+1 + "\n" + lastSearchResults.get(i).toString()).queue();
-        //         }
-        //     }
-            
-        // }else if(content.contains("more") && lastAction == Action.SEARCH){
-        //     lastAction = Action.SEARCH;
-        //     for(int i=2;i<lastSearchResults.size();i++){
-        //         channel.sendMessage(i+1 + "\n" + lastSearchResults.get(i).toString()).queue();
-        //     }
-        // }
-        // if(content.startsWith("!cancel")){
-        //     lastAction = Action.IDLE;
-        // }
         
     }
 
