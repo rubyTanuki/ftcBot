@@ -15,6 +15,10 @@ public class Product {
         return name + "\n" + link + "\n\n";
     }
 
+    public String toFile(){
+        return link + "\n\n";
+    }
+
     public String getName(){
         return name;
     }

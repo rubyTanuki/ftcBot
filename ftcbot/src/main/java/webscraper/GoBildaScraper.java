@@ -25,7 +25,6 @@ public class GoBildaScraper
     }
 
     private static ArrayList<Product> getProductsFromSearch(WebDriver driver, String url){
-        
         driver.get(url);
         ArrayList<Product> results = new ArrayList<>();
         try{
@@ -48,6 +47,24 @@ public class GoBildaScraper
         }
         driver.quit();
         return results;
+    }
+
+    public static Product getProductFromLink(String url){
+        System.setProperty("webdriver.http.factory", "jdk-http-client");
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new");
+
+        WebDriver driver = new ChromeDriver(options);
+        driver.get(url);
+
+        try{
+            String productName = driver.findElement(By.cssSelector("h1[class]")).getAttribute("class");
+            String imageUrl = driver.findElement(By.cssSelector("img[srcset]")).getAttribute("srcset");
+            return new Product(url, productName, imageUrl);   
+        }catch(Exception e){
+            return null;
+        }
     }
 }
 
